@@ -88,4 +88,29 @@ guard let numberBсString = readLine(), let numberBс = Int(numberBсString) els
 print("Результат вычисления равен: \(expRec2(base: numberAс, rank: numberBс))")
 print("---------------")
 
+//MARK:- Задание 3: Исполнитель Калькулятор преобразует целое число, записанное на экране. У исполнителя две команды, каждой команде присвоен номер:
+//Прибавь 1
+//Умножь на 2 Первая команда увеличивает число на экране на 1, вторая увеличивает это число в 2 раза. Сколько существует программ, которые число 3 преобразуют в число 20?
 
+let start = 3
+let finish = 20
+
+var solutions: [String] = []
+
+func nextStep(currentValue: Int, currentSolution: String) {
+    guard currentValue <= finish else { return }
+    if currentValue == finish {
+        let solution = "\(currentSolution) = \(finish)"
+        solutions.append(solution)
+        print(solution)
+        return
+    }
+    nextStep(currentValue: currentValue + 1, currentSolution: currentSolution + " + 1")
+    nextStep(currentValue: currentValue * 2,
+             currentSolution: currentSolution.count > String(start).count
+                ? "(\(currentSolution)) * 2"
+                : "\(currentSolution) * 2")
+}
+
+nextStep(currentValue: start, currentSolution: "\(start)")
+print("Всего решений: \(solutions.count)")
